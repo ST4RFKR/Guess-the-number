@@ -11,7 +11,6 @@ let score = 20;
 let highScore = 0;
 
 let  secretNumber = Math.trunc(Math.random() * 20) + 1;
-console.log(secretNumber);
 
 
 bntCheck.addEventListener('click', () =>{
@@ -29,25 +28,36 @@ bntCheck.addEventListener('click', () =>{
             highScore = score;
             labelHighscore.textContent = `Лучший результат: ${highScore}`;
         }
-    } else if (guessingNumber < secretNumber){
+    }else if (guessingNumber !== secretNumber){
         if(score > 1){
-            guessMessage.textContent = 'Слишком мало!'
+            guessMessage.textContent = guessingNumber < secretNumber ?  'Слишком мало!' : 'Слишком много!';
             score--;
             scoreDOM.textContent = score; 
         }else {
             guessMessage.textContent = 'Вы проиграли! Начните сначала!';
             scoreDOM.textContent = 0;
-        }
-    } else if (guessingNumber > secretNumber){
-        if(score > 1){
-            guessMessage.textContent = 'Слишком много!'
-            score--;
-            scoreDOM.textContent = score; 
-        }else {
-            guessMessage.textContent = 'Вы проиграли! Начните сначала!';
-            scoreDOM.textContent = 0;
-        }
+        } 
     }
+    
+    // else if (guessingNumber < secretNumber){
+    //     if(score > 1){
+    //         guessMessage.textContent = 'Слишком мало!'
+    //         score--;
+    //         scoreDOM.textContent = score; 
+    //     }else {
+    //         guessMessage.textContent = 'Вы проиграли! Начните сначала!';
+    //         scoreDOM.textContent = 0;
+    //     }
+    // } else if (guessingNumber > secretNumber){
+    //     if(score > 1){
+    //         guessMessage.textContent = 'Слишком много!'
+    //         score--;
+    //         scoreDOM.textContent = score; 
+    //     }else {
+    //         guessMessage.textContent = 'Вы проиграли! Начните сначала!';
+    //         scoreDOM.textContent = 0;
+    //     }
+    // }
     if (!score){
         guessMessage.textContent = 'Вы проиграли! Начните сначала!'
     }
@@ -55,7 +65,6 @@ bntCheck.addEventListener('click', () =>{
 btnAgain.addEventListener('click', () =>{
     secretNumber = Math.trunc(Math.random() * 20) + 1;
     score = 20;
-    console.log(secretNumber);
 
     document.querySelector('body').style.backgroundColor ='';
     question.textContent = '???';
