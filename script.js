@@ -5,9 +5,12 @@ const scoreDOM = document.querySelector('.score');
 const numberInput = document.querySelector('.number-input');
 const bntCheck = document.querySelector('.check');
 const btnAgain = document.querySelector('.again');
+const labelHighscore = document.querySelector('.label-highscore');
 
 let score = 20;
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let highScore = 0;
+
+let  secretNumber = Math.trunc(Math.random() * 20) + 1;
 console.log(secretNumber);
 
 
@@ -22,6 +25,10 @@ bntCheck.addEventListener('click', () =>{
         question.style.width = '30rem';
         question.style.padding = '3rem 0rem';
         question.textContent = secretNumber;
+        if (score > highScore) {
+            highScore = score;
+            labelHighscore.textContent = `Лучший результат: ${highScore}`;
+        }
     } else if (guessingNumber < secretNumber){
         if(score > 1){
             guessMessage.textContent = 'Слишком мало!'
@@ -46,11 +53,16 @@ bntCheck.addEventListener('click', () =>{
     }
 });
 btnAgain.addEventListener('click', () =>{
-    question.textContent = '???';
+    secretNumber = Math.trunc(Math.random() * 20) + 1;
     score = 20;
-    scoreDOM.textContent = score;
+    console.log(secretNumber);
+
     document.querySelector('body').style.backgroundColor ='';
+    question.textContent = '???';
     question.style.width ='';
     question.style.padding ='';
+    guessMessage.textContent = 'Начни угадывать!';
     numberInput.value = '';
+    scoreDOM.textContent = score;
+
 })
